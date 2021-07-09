@@ -8,6 +8,6 @@ package ercanduman.csvparsingdemo.data
  */
 object Constants {
     const val CSV_FILE_NAME = "issues.csv"
+    const val CSV_LINE_SEPARATOR = ","
     const val CSV_SKIP_FIRST_LINE = true
-    const val FORMAT_DATE_OF_BIRTH = "yyyy-MM-dd'T'HH:mm:ss"
 }
