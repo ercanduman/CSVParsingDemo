@@ -1,7 +1,8 @@
-package ercanduman.csvparsingdemo
+package ercanduman.csvparsingdemo.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import ercanduman.csvparsingdemo.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

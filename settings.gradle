@@ -1,0 +1,2 @@
+rootProject.name = "CSVParsingDemo"
+include ':app'
