@@ -7,7 +7,11 @@ package ercanduman.csvparsingdemo.data
  * @since  09.07.2021
  */
 object Constants {
+    // CSV File related constant variables.
     const val CSV_FILE_NAME = "issues.csv"
     const val CSV_LINE_SEPARATOR = ","
+    const val CSV_LINE_FIELD_SIZE = 4
     const val CSV_SKIP_FIRST_LINE = true
+
+    const val INVALID_NUMBER = -1
 }
