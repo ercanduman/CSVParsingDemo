@@ -24,15 +24,13 @@ class LocalDataSource(private val context: Context) {
         emit(Resource.Loading)
         try {
             // Reading a file should be done via IO dispatcher
-            val fileContentLines = withContext(Dispatchers.IO) {
-                context.assets.open(CSV_FILE_NAME).bufferedReader().lines()
-            }
+            val lines = getFileLines()
 
-            if (CSV_SKIP_FIRST_LINE) fileContentLines.skip(1) // Skips 1. line of file which contains only headers.
+            if (CSV_SKIP_FIRST_LINE) lines.skip(1) // Skips 1. line of file which contains only headers.
 
             val issueList = mutableListOf<Issue>()
             var lineCounter = 1
-            for (line in fileContentLines) {
+            for (line in lines) {
                 lineCounter++
 
                 val fields = line.split(CSV_LINE_SEPARATOR)
@@ -58,6 +56,10 @@ class LocalDataSource(private val context: Context) {
         } catch (e: Exception) {
             emit(Resource.Error("Error occurred when file read. Error: ${e.message}"))
         }
+    }
+
+    private suspend fun getFileLines() = withContext(Dispatchers.IO) {
+        context.assets.open(CSV_FILE_NAME).bufferedReader().lines()
     }
 
     private fun getIssueCounter(countText: String): Int =
