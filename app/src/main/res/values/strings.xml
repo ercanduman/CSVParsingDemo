@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CSVParsingDemo</string>
+    <string name="error_when_reading">"Error occurred when file read. Error: %s"</string>
 </resources>
