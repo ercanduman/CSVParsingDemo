@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import ercanduman.csvparsingdemo.data.source.LocalDataSource
 import ercanduman.csvparsingdemo.databinding.ActivityMainBinding
 import ercanduman.csvparsingdemo.util.Resource
+import ercanduman.csvparsingdemo.util.exhaustive
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,10 +27,13 @@ class MainActivity : AppCompatActivity() {
         viewModel.getData()
         viewModel.resourceLiveData.observe(this) { resource ->
             when (resource) {
-                is Resource.Error -> TODO()
-                is Resource.Success -> TODO()
-                is Resource.Loading -> TODO()
-            }
+                is Resource.Error -> {
+                }
+                is Resource.Success -> {
+                }
+                is Resource.Loading -> {
+                }
+            }.exhaustive
         }
     }
 }
