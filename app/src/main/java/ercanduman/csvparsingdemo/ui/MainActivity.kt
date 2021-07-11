@@ -14,11 +14,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
     private lateinit var binding: ActivityMainBinding
+    private lateinit var issueAdapter: IssueAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        issueAdapter = IssueAdapter()
         val factory = MainViewModelFactory(LocalDataSource(this))
         viewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
 
@@ -47,11 +49,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleRetrievedData(issues: List<Issue>) {
+        issueAdapter.submitList(issues)
         binding.apply {
             mainProgressBar.isVisible = false
             mainRecyclerView.apply {
                 isVisible = true
                 setHasFixedSize(true) // Added for better performance optimizations.
+                adapter = issueAdapter
             }
         }
     }
