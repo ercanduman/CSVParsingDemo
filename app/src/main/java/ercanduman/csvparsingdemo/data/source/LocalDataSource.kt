@@ -1,6 +1,7 @@
 package ercanduman.csvparsingdemo.data.source
 
 import android.content.Context
+import ercanduman.csvparsingdemo.R
 import ercanduman.csvparsingdemo.data.Constants.CSV_FILE_NAME
 import ercanduman.csvparsingdemo.data.Constants.CSV_LINE_FIELD_SIZE
 import ercanduman.csvparsingdemo.data.Constants.CSV_LINE_SEPARATOR
@@ -54,7 +55,7 @@ class LocalDataSource(private val context: Context) {
 
             emit(Resource.Success(issueList))
         } catch (e: Exception) {
-            emit(Resource.Error("Error occurred when file read. Error: ${e.message}"))
+            emit(Resource.Error(context.getString(R.string.error_when_reading, e.message)))
         }
     }
 
