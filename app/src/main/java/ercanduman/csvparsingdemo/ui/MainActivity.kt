@@ -47,7 +47,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleRetrievedData(issues: List<Issue>) {
-        binding.mainProgressBar.isVisible = false
-
+        binding.apply {
+            mainProgressBar.isVisible = false
+            mainRecyclerView.apply {
+                isVisible = true
+                setHasFixedSize(true) // Added for better performance optimizations.
+            }
+        }
     }
 }
