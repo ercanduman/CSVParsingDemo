@@ -27,10 +27,8 @@ class LocalDataSource(private val context: Context) {
             // Reading a file should be done via IO dispatcher
             val lines = getFileLines()
 
-            if (CSV_SKIP_FIRST_LINE) lines.skip(1) // Skips 1. line of file which contains only headers.
-
             val issueList = mutableListOf<Issue>()
-            var lineCounter = 1
+            var lineCounter = 0
             for (line in lines) {
                 lineCounter++
 
@@ -46,9 +44,9 @@ class LocalDataSource(private val context: Context) {
                     continue
                 }
 
-                val firstName = fields[0]
-                val surname = fields[1]
-                val dateOfBirth = fields[3]
+                val firstName = fields[0].replace("\"", "")
+                val surname = fields[1].replace("\"", "")
+                val dateOfBirth = fields[3].replace("\"", "")
 
                 issueList.add(Issue(firstName, surname, issueCount, dateOfBirth))
             }
@@ -60,7 +58,17 @@ class LocalDataSource(private val context: Context) {
     }
 
     private suspend fun getFileLines() = withContext(Dispatchers.IO) {
-        context.assets.open(CSV_FILE_NAME).bufferedReader().lines()
+        val lines = context.assets
+            .open(CSV_FILE_NAME)
+            .bufferedReader()
+            .use { it.readText() }
+            .lines()
+
+        if (CSV_SKIP_FIRST_LINE) {
+            /* Skips 1. line of file which contains only headers such as "First name","Sur name","Issue count","Date of birth" */
+            return@withContext lines.drop(1)
+        }
+        return@withContext lines
     }
 
     private fun getIssueCounter(countText: String): Int =
@@ -69,4 +77,8 @@ class LocalDataSource(private val context: Context) {
         } catch (e: NumberFormatException) {
             INVALID_NUMBER
         }
+
+    companion object {
+        private const val TAG = "LocalDataSource"
+    }
 }
