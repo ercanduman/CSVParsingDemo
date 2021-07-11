@@ -44,9 +44,9 @@ class LocalDataSource(private val context: Context) {
                     continue
                 }
 
-                val firstName = fields[0]
-                val surname = fields[1]
-                val dateOfBirth = fields[3]
+                val firstName = fields[0].replace("\"", "")
+                val surname = fields[1].replace("\"", "")
+                val dateOfBirth = fields[3].replace("\"", "")
 
                 issueList.add(Issue(firstName, surname, issueCount, dateOfBirth))
             }

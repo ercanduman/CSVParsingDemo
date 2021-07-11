@@ -41,10 +41,16 @@ class IssueAdapter : ListAdapter<Issue, IssueAdapter.IssueViewHolder>(ISSUE_COMP
 
         fun bindIssue(issue: Issue) {
             binding.apply {
-                itemBirthDate.text = issue.dateOfBirth
-                itemIssueCount.text = issue.issueCount.toString()
+                val context = root.context
 
-                val firstNameAndSurname = binding.root.context.getString(
+                val dateOfBirth = context.getString(R.string.format_date_of_birth, issue.dateOfBirth)
+                itemBirthDate.text = dateOfBirth
+
+                val issueCount =
+                    context.getString(R.string.format_issue_count, issue.issueCount.toString())
+                itemIssueCount.text = issueCount
+
+                val firstNameAndSurname = context.getString(
                     R.string.format_first_name_and_surname,
                     issue.firstname,
                     issue.surname
