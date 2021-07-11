@@ -30,7 +30,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/error_when_reading"
+        tools:text="@string/no_data_found"
         tools:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView
