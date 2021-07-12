@@ -1,7 +1,6 @@
 package ercanduman.csvparsingdemo.ui
 
 import android.os.Bundle
-import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
@@ -22,9 +21,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val factory = MainViewModelFactory(LocalDataSource(this))
-        val viewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
-        setViewModel(viewModel)
-
+        viewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
         getFileData()
     }
 
@@ -66,15 +63,5 @@ class MainActivity : AppCompatActivity() {
                 adapter = issueAdapter
             }
         }
-    }
-
-    /**
-     * Created only for testing in order to provide same instance of [viewModel].
-     *
-     * @param viewModel Instance of MainViewModel
-     */
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    fun setViewModel(viewModel: MainViewModel) {
-        this.viewModel = viewModel
     }
 }
