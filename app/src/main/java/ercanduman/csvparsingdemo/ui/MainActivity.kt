@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
 
         val factory = MainViewModelFactory(LocalDataSource(this))
         viewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
-
         getFileData()
     }
 
