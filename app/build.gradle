@@ -58,6 +58,7 @@ dependencies {
 
     // Mockk
     testImplementation "io.mockk:mockk:1.11.0"
+    androidTestImplementation "io.mockk:mockk-android:1.11.0"
 
     // Coroutines Test
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0'
