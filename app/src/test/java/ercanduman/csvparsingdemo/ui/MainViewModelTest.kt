@@ -59,7 +59,7 @@ class MainViewModelTest {
 
         val result: Resource = viewModel.resourceLiveData.getOrAwaitValueTest()
         assertThat(result is Resource.Success)
-        assertThat((result as Resource.Success).issues.size).isEqualTo(providedList.size)
+        assertThat((result as Resource.Success).issues?.size).isEqualTo(providedList.size)
     }
 
     @Test

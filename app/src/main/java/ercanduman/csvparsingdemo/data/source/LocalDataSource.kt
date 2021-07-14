@@ -100,8 +100,4 @@ class LocalDataSource(private val context: Context) {
         } catch (e: NumberFormatException) {
             INVALID_NUMBER
         }
-
-    companion object {
-        private const val TAG = "LocalDataSource"
-    }
 }
