@@ -28,20 +28,39 @@ class LocalDataSource(private val context: Context) {
             val lines = getFileLines()
 
             val issueList = mutableListOf<Issue>()
-            var lineCounter = 0
+            var lineCounter = if (CSV_SKIP_FIRST_LINE) 1 else 0
             for (line in lines) {
                 lineCounter++
 
+                if (line.isBlank()) {
+                    val message = getMessage(lineCounter, R.string.format_error_empty)
+
+                    emit(Resource.Error(message))
+                    return@flow
+                }
+
                 val fields = line.split(CSV_LINE_SEPARATOR)
                 if (fields.size != CSV_LINE_FIELD_SIZE) {
-                    emit(Resource.Error("#$lineCounter line of CSV file has invalid number of field. Line should contain at least $CSV_LINE_FIELD_SIZE items."))
-                    continue
+                    val message = getMessage(
+                        lineCounter,
+                        R.string.format_error_invalid_field,
+                        CSV_LINE_FIELD_SIZE.toString()
+                    )
+
+                    emit(Resource.Error(message))
+                    return@flow
                 }
 
                 val issueCount = getIssueCounter(fields[2])
                 if (issueCount == INVALID_NUMBER) {
-                    emit(Resource.Error("#$lineCounter line of CSV file has invalid Integer number for Issue Count. Found value is ${fields[2]}"))
-                    continue
+                    val message = getMessage(
+                        lineCounter,
+                        R.string.format_error_invalid_integer,
+                        fields[2]
+                    )
+
+                    emit(Resource.Error(message))
+                    return@flow
                 }
 
                 val firstName = fields[0].replace("\"", "")
@@ -52,10 +71,14 @@ class LocalDataSource(private val context: Context) {
             }
 
             emit(Resource.Success(issueList))
-        } catch (e: Exception) {
-            emit(Resource.Error(context.getString(R.string.error_when_reading, e.message)))
+        } catch (e: Throwable) {
+            val errorMessage = e.message ?: context.getString(R.string.unknown_error)
+            emit(Resource.Error(context.getString(R.string.error_when_reading, errorMessage)))
         }
     }
+
+    private fun getMessage(lineNumber: Int, resourceId: Int, optional: String? = "") =
+        context.getString(resourceId, lineNumber, optional)
 
     private suspend fun getFileLines() = withContext(Dispatchers.IO) {
         val lines = context.assets

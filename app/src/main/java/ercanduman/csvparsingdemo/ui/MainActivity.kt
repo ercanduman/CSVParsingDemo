@@ -29,32 +29,31 @@ class MainActivity : AppCompatActivity() {
         viewModel.getData()
         viewModel.resourceLiveData.observe(this) { resource ->
             when (resource) {
-                is Resource.Error -> displayErrorMessage(resource.message)
+                is Resource.Error -> displayViews(resource.message)
                 is Resource.Success -> handleRetrievedData(resource.issues)
                 is Resource.Loading -> binding.mainProgressBar.isVisible = true
             }.exhaustive
         }
     }
 
-    private fun displayErrorMessage(message: String) {
+    private fun displayViews(errorMessage: String? = "") {
         binding.apply {
             mainProgressBar.isVisible = false
             mainErrorMessage.apply {
-                isVisible = true
-                text = message
+                isVisible = errorMessage.isNullOrEmpty().not()
+                text = errorMessage
             }
+            mainRecyclerView.isVisible = errorMessage.isNullOrEmpty()
         }
     }
 
-    private fun handleRetrievedData(issues: List<Issue>) {
-        if (issues.isEmpty()) {
-            displayErrorMessage(getString(R.string.no_data_found))
+    private fun handleRetrievedData(issues: List<Issue>?) {
+        if (issues.isNullOrEmpty()) {
+            displayViews(getString(R.string.no_data_found))
             return
         }
-
+        displayViews(null)
         binding.apply {
-            mainProgressBar.isVisible = false
-
             val issueAdapter = IssueAdapter().apply { submitList(issues) }
 
             mainRecyclerView.apply {
