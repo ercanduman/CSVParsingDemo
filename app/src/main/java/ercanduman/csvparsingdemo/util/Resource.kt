@@ -10,6 +10,6 @@ import ercanduman.csvparsingdemo.data.model.Issue
  */
 sealed class Resource {
     object Loading : Resource()
-    data class Error(val message: String) : Resource()
-    data class Success(val issues: List<Issue>) : Resource()
+    data class Error(val message: String? = "") : Resource()
+    data class Success(val issues: List<Issue>? = emptyList()) : Resource()
 }

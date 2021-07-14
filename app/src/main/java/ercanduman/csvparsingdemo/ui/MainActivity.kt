@@ -36,25 +36,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun displayErrorMessage(message: String) {
+    private fun displayErrorMessage(message: String? = "") {
         binding.apply {
             mainProgressBar.isVisible = false
             mainErrorMessage.apply {
-                isVisible = true
+                isVisible = message?.isNotEmpty()!!
                 text = message
             }
         }
     }
 
-    private fun handleRetrievedData(issues: List<Issue>) {
-        if (issues.isEmpty()) {
+    private fun handleRetrievedData(issues: List<Issue>?) {
+        if (issues.isNullOrEmpty()) {
             displayErrorMessage(getString(R.string.no_data_found))
             return
         }
-
+        displayErrorMessage(null)
         binding.apply {
-            mainProgressBar.isVisible = false
-
             val issueAdapter = IssueAdapter().apply { submitList(issues) }
 
             mainRecyclerView.apply {

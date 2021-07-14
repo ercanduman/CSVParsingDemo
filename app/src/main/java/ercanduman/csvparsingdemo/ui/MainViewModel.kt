@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ercanduman.csvparsingdemo.data.source.LocalDataSource
 import ercanduman.csvparsingdemo.util.Resource
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -22,6 +23,8 @@ class MainViewModel(private val dataSource: LocalDataSource) : ViewModel() {
     val resourceLiveData: LiveData<Resource> = _resourceMutableLiveData
 
     fun getData() = viewModelScope.launch {
-        dataSource.readFile().collect { _resourceMutableLiveData.value = it }
+        dataSource.readFile()
+            .catch { error -> _resourceMutableLiveData.value = Resource.Error(error.message) }
+            .collect { _resourceMutableLiveData.value = it }
     }
 }

@@ -58,10 +58,10 @@ class MainActivityTest {
                 is Resource.Error -> checkErrorViews()
                 is Resource.Loading -> checkLoadingViews()
                 is Resource.Success -> {
-                    if (resource.issues.isNotEmpty()) {
-                        checkSuccessViews()
-                    } else {
+                    if (resource.issues.isNullOrEmpty()) {
                         checkErrorViews()
+                    } else {
+                        checkSuccessViews()
                     }
                 }
             }
@@ -81,7 +81,7 @@ class MainActivityTest {
                 is Resource.Error -> checkErrorViews()
                 is Resource.Loading -> checkLoadingViews()
                 is Resource.Success -> {
-                    if (resource.issues.isEmpty()) {
+                    if (resource.issues.isNullOrEmpty()) {
                         checkErrorViews()
 
                         // Check correct error message

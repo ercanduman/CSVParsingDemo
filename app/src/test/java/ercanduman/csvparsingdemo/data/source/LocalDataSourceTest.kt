@@ -46,7 +46,7 @@ class LocalDataSourceTest {
 
         localDataSource.readFile().collect { result ->
             assertThat(result is Resource.Success)
-            assertThat((result as Resource.Success).issues.size).isEqualTo(2)
+            assertThat((result as Resource.Success).issues?.size).isEqualTo(2)
         }
     }
 

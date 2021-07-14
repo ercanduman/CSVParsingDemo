@@ -28,7 +28,7 @@ class LocalDataSource(private val context: Context) {
             val lines = getFileLines()
 
             val issueList = mutableListOf<Issue>()
-            var lineCounter = 0
+            var lineCounter = if (CSV_SKIP_FIRST_LINE) 1 else 0
             for (line in lines) {
                 lineCounter++
 
@@ -52,11 +52,13 @@ class LocalDataSource(private val context: Context) {
             }
 
             emit(Resource.Success(issueList))
-        } catch (e: Exception) {
-            emit(Resource.Error(context.getString(R.string.error_when_reading, e.message)))
+        } catch (e: Throwable) {
+            val errorMessage = e.message ?: "Unknown Error"
+            emit(Resource.Error(context.getString(R.string.error_when_reading, errorMessage)))
         }
     }
 
+    @Suppress("BlockingMethodInNonBlockingContext")
     private suspend fun getFileLines() = withContext(Dispatchers.IO) {
         val lines = context.assets
             .open(CSV_FILE_NAME)
