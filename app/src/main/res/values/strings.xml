@@ -11,6 +11,6 @@
     <string name="format_first_name_and_surname">Name: %s %s</string>
 
     <string name="format_error_empty">"%s. line of CSV file is EMPTY!"</string>
-    <string name="format_error_invalid_field">%s. line of CSV file has invalid number of field. Line should contain at least %s items.</string>
+    <string name="format_error_invalid_field">%s. line of CSV file has invalid number of field. Line should contain at least %s items separated by commas(,)</string>
     <string name="format_error_invalid_integer">"%s. line of CSV file has invalid Integer number for Issue Count. Found value is %s</string>
 </resources>
