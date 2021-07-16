@@ -22,17 +22,15 @@
         android:id="@+id/main_error_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_layout_margin"
+        android:layout_marginTop="@dimen/error_text_view_margin_top"
         android:gravity="center"
+        android:padding="@dimen/default_layout_margin"
+        android:text="@string/loading"
         android:textSize="@dimen/default_text_size"
         android:textStyle="bold"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/no_data_found"
-        tools:visibility="visible" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_recycler_view"
@@ -44,7 +42,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:itemCount="4"
+        tools:itemCount="2"
         tools:listitem="@layout/layout_list_item_issue"
         tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>
