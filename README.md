@@ -15,10 +15,12 @@ LocalDataSource.kt class is used which has responsibility to retrieve data from 
 
 ### Issue List
 When application started for first time Loading screen will be displayed if there huge data to load.
-<img src="https://raw.githubusercontent.com/ercanduman/CSVParsingDemo/master/output/ercanduman_csv_parsing_demo_loading_screen.png" width="25%" title="Issue List">
+
+<img src="https://github.com/ercanduman/CSVParsingDemo/blob/master/attachments/ercanduman_csv_parsing_demo_loading_screen.png" width="25%" title="Issue List">
 
 MainActivity.kt is the main UI activity where all user interactions will be handled and also the issue list will be displayed in RecyclerView.
-<img src="https://raw.githubusercontent.com/ercanduman/CSVParsingDemo/master/output/ercanduman_csv_parsing_demo_loaded_data_screen.png" width="25%" title="Issue List">
+
+<img src="https://github.com/ercanduman/CSVParsingDemo/blob/master/attachments/ercanduman_csv_parsing_demo_loaded_data_screen.png" width="25%" title="Issue List">
 
 #### Build
 This application uses the Gradle build system. To build this project use "Import Project" in Android Studio and use the following command. > gradlew build
