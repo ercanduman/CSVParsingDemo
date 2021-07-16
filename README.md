@@ -26,7 +26,8 @@ MainActivityTest.kt class created to store all UI related (Instrumented) test ca
 
 Happy coding! 👍 🥇
 
-License
-License
+## License
+
+[![License](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://github.com/ercanduman/CSVParsingDemo/blob/master/LICENSE)
 
 ENB Creative, Copyright (C) 2021
