@@ -4,6 +4,7 @@
 
     <string name="no_data_found">No data found.</string>
     <string name="unknown_error">Unknown Error</string>
+    <string name="loading">Loading… Please wait</string>
 
     <!-- List item formats -->
     <string name="format_date_of_birth">Date of Birth: %s</string>
